@@ -14,16 +14,54 @@
 
 <body class="bg-light">
 
+<!-- Login Protection -->
+<script>
+if (!localStorage.getItem("user")) {
+    window.location.href = "login.html";
+}
+</script>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="#">
+            Employee Management System
+        </a>
+
+        <div class="d-flex align-items-center">
+
+            <span class="text-white me-3">
+                Welcome,
+                <span id="loggedUser"></span>
+            </span>
+
+            <button
+                onclick="logout()"
+                class="btn btn-danger btn-sm">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</nav>
+
 <div class="container mt-5">
 
+    <!-- Heading -->
     <div class="text-center mb-4">
+
         <h1 class="fw-bold text-primary">
-            Employee Management System
+            Employee Dashboard
         </h1>
 
         <p class="text-muted">
             Spring Boot + JavaScript CRUD Application
         </p>
+
     </div>
 
     <!-- Employee Form -->
@@ -40,42 +78,57 @@
                 <div class="row g-3">
 
                     <div class="col-md-3">
-                        <input type="text"
-                               id="name"
-                               class="form-control"
-                               placeholder="Employee Name"
-                               required>
+
+                        <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            placeholder="Employee Name"
+                            required>
+
                     </div>
 
                     <div class="col-md-3">
-                        <input type="text"
-                               id="department"
-                               class="form-control"
-                               placeholder="Department"
-                               required>
+
+                        <input
+                            type="text"
+                            id="department"
+                            class="form-control"
+                            placeholder="Department"
+                            required>
+
                     </div>
 
                     <div class="col-md-3">
-                        <input type="email"
-                               id="email"
-                               class="form-control"
-                               placeholder="Email"
-                               required>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-control"
+                            placeholder="Email"
+                            required>
+
                     </div>
 
                     <div class="col-md-2">
-                        <input type="number"
-                               id="salary"
-                               class="form-control"
-                               placeholder="Salary"
-                               required>
+
+                        <input
+                            type="number"
+                            id="salary"
+                            class="form-control"
+                            placeholder="Salary"
+                            required>
+
                     </div>
 
                     <div class="col-md-1">
-                        <button type="submit"
-                                class="btn btn-success w-100">
+
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100">
                             Add
                         </button>
+
                     </div>
 
                 </div>
@@ -86,7 +139,7 @@
 
     </div>
 
-    <!-- Dashboard Card -->
+    <!-- Dashboard Cards -->
     <div class="row mt-4">
 
         <div class="col-md-4">
@@ -97,7 +150,8 @@
 
                     <h5>Total Employees</h5>
 
-                    <h2 id="totalEmployees"
+                    <h2
+                        id="totalEmployees"
                         class="text-primary">
                         0
                     </h2>
@@ -112,6 +166,7 @@
 
     <!-- Employee Table -->
     <div class="card shadow border-0 mt-4">
+        
 
         <div class="card-header bg-dark text-white">
             Employee List
@@ -150,8 +205,24 @@
 
 </div>
 
+<script>
+
+document.getElementById("loggedUser").innerText =
+localStorage.getItem("user");
+
+function logout() {
+
+    localStorage.removeItem("user");
+
+    window.location.href =
+    "login.html";
+}
+
+</script>
+
 <script src="/employee.js"></script>
 
 </body>
-</html>
 
+</html>
+```
