@@ -1,73 +1,75 @@
 # Employee Management System
 
-A full-stack Employee Management System built using Spring Boot, PostgreSQL, HTML, CSS, and JavaScript. This application allows users to perform CRUD (Create, Read, Update, Delete) operations on employee records through a simple and responsive web interface.
+A Full Stack Employee Management System built using Spring Boot, PostgreSQL, HTML, CSS, JavaScript, and Bootstrap.
 
 ## Features
 
-- Add a new employee
-- View all employees
-- Update employee details
-- Delete employee records
-- RESTful API implementation
-- PostgreSQL database integration
-- Responsive frontend using HTML, CSS, and JavaScript
-
----
+* User Registration
+* User Login Authentication
+* BCrypt Password Encryption
+* Duplicate Email Validation
+* Employee CRUD Operations
+* Add Employee
+* View Employee List
+* Update Employee Details
+* Delete Employee
+* Employee Dashboard
+* PostgreSQL Database Integration
+* REST API Integration
+* Responsive User Interface
+* Logout Functionality
 
 ## Tech Stack
 
 ### Backend
-- Java 17
-- Spring Boot
-- Spring Data JPA
-- REST API
+
+* Java 17
+* Spring Boot
+* Spring Data JPA
+* PostgreSQL
+* Maven
 
 ### Frontend
-- HTML5
-- CSS3
-- JavaScript (Fetch API)
 
-### Database
-- PostgreSQL
+* HTML5
+* CSS3
+* Bootstrap 5
+* JavaScript
 
-### Build Tool
-- Maven
+### Security
 
----
+* BCrypt Password Encryption
+* Duplicate Email Validation
 
 ## Project Structure
 
 ```text
-src/
-├── main/
-│   ├── java/com/example/ems/
-│   │   ├── controller/
-│   │   │   └── EmployeeController.java
-│   │   ├── entity/
-│   │   │   └── Employee.java
-│   │   ├── repository/
-│   │   │   └── EmployeeRepository.java
-│   │   ├── service/
-│   │   │   └── EmployeeService.java
-│   │   └── EmsApplication.java
+ems
+│
+├── src/main/java
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   └── config
+│
+├── src/main/resources
+│   ├── static
+│   │   ├── register.html
+│   │   ├── login.html
+│   │   ├── employee.html
+│   │   ├── auth.js
+│   │   ├── employee.js
+│   │   └── style.css
 │   │
-│   ├── resources/
-│   │   ├── application.properties
-│   │   └── static/
-│   │       ├── employee.html
-│   │       ├── employee.js
-│   │       └── style.css
+│   └── application.properties
+│
+└── pom.xml
 ```
-
----
 
 ## Database Configuration
 
-Update the database configuration in:
-
-```properties
-src/main/resources/application.properties
-```
+Update application.properties:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/ems_db
@@ -78,115 +80,91 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-Create a PostgreSQL database:
-
-```sql
-CREATE DATABASE ems_db;
-```
-
----
-
 ## Installation & Setup
 
-### 1. Clone the Repository
+### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/Employee_management_system.git
-cd Employee_management_system
+git clone https://github.com/YOUR_USERNAME/Employee-Management-System.git
+cd Employee-Management-System
 ```
 
-### 2. Configure PostgreSQL
-
-Create the database:
-
-```sql
-CREATE DATABASE ems_db;
-```
-
-Update username and password in `application.properties`.
-
-### 3. Run the Application
-
-Using Maven:
+### Build Project
 
 ```bash
-./mvnw spring-boot:run
+mvn clean install
 ```
 
-Or:
+### Run Application
 
 ```bash
 mvn spring-boot:run
 ```
 
-Application will start on:
+### Open Application
+
+Register Page
 
 ```text
-http://localhost:8080
+http://localhost:8080/register.html
 ```
 
----
+Login Page
 
-## REST API Endpoints
-
-| Method | Endpoint | Description |
-|----------|----------|-------------|
-| GET | /api/employees | Get all employees |
-| GET | /api/employees/{id} | Get employee by ID |
-| POST | /api/employees | Create employee |
-| PUT | /api/employees/{id} | Update employee |
-| DELETE | /api/employees/{id} | Delete employee |
-
----
-
-## Employee JSON Example
-
-```json
-{
-  "name": "Rajnish Kumar",
-  "department": "IT",
-  "email": "rajnish@example.com",
-  "salary": 50000
-}
+```text
+http://localhost:8080/login.html
 ```
 
----
+Employee Dashboard
 
-## Screenshots
+```text
+http://localhost:8080/employee.html
+```
 
-Add screenshots of your application here.
+## API Endpoints
 
-### Employee Dashboard
+### Authentication
 
-![Dashboard](screenshots/dashboard.png)
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/auth/register |
+| POST   | /api/auth/login    |
 
-### Add Employee
+### Employee
 
-![Add Employee](screenshots/add-employee.png)
+| Method | Endpoint            |
+| ------ | ------------------- |
+| GET    | /api/employees      |
+| POST   | /api/employees      |
+| PUT    | /api/employees/{id} |
+| DELETE | /api/employees/{id} |
 
----
+## Security Features
+
+* Passwords are encrypted using BCrypt.
+* Duplicate email registration is prevented.
+* User authentication before accessing dashboard.
+* Secure REST API communication.
 
 ## Future Enhancements
 
-- Login and Registration
-- JWT Authentication
-- Search Employees
-- Pagination
-- Sorting
-- Role-Based Access Control
-- Docker Deployment
-
----
+* Employee Search
+* JWT Authentication
+* Spring Security
+* Dashboard Analytics
+* Role Based Access Control
+* Dark Mode
+* Cloud Deployment
 
 ## Author
 
 Rajnish Kumar
 
-GitHub:
-https://github.com/Rajnishkumar693
+### Connect With Me
+
+GitHub: https://github.com/Rajnishkumar693
 
 ---
 
-## License
+⭐ If you like this project, don't forget to star the repository.
 
-This project is open-source and available under the MIT License.
