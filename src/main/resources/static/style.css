@@ -1,18 +1,68 @@
 body{
-    font-family: Arial;
-    margin:20px;
+    background:#f4f7fc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-input{
-    padding:10px;
-    margin:5px;
+.container{
+    max-width:1200px;
 }
 
-button{
-    padding:10px;
+.card{
+    border:none;
+    border-radius:15px;
+    overflow:hidden;
 }
 
-table{
-    width:100%;
-    margin-top:20px;
+.card-header{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.form-control{
+    border-radius:10px;
+}
+
+.form-control:focus{
+    box-shadow:0 0 8px rgba(13,110,253,0.3);
+}
+
+.btn{
+    border-radius:10px;
+    font-weight:600;
+}
+
+.table{
+    margin-bottom:0;
+}
+
+.table th{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table-hover tbody tr:hover{
+    background-color:#eef5ff;
+    transition:0.3s;
+}
+
+#totalEmployees{
+    font-size:40px;
+    font-weight:bold;
+}
+
+h1{
+    letter-spacing:1px;
+}
+
+.card-body{
+    padding:25px;
+}
+
+.shadow{
+    box-shadow:0 8px 20px rgba(0,0,0,0.08)!important;
 }

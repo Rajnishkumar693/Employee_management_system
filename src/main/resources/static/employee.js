@@ -1,8 +1,8 @@
+// javascript
 // Load data when page opens
 window.onload = function () {
     loadEmployees();
 };
-
 
 // Add Employee
 document.getElementById("employeeForm")
@@ -11,74 +11,55 @@ document.getElementById("employeeForm")
     e.preventDefault();
 
     const employee = {
-
-        name:
-        document.getElementById("name").value,
-
-        department:
-        document.getElementById("department").value,
-
-        email:
-        document.getElementById("email").value,
-
-        salary:
-        document.getElementById("salary").value
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        email: document.getElementById("email").value,
+        salary: document.getElementById("salary").value
     };
 
-    const response =
-        await fetch(
-            "http://localhost:8080/api/employees",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                    "application/json"
-                },
-
-                body:
-                JSON.stringify(employee)
-            }
-        );
+    const response = await fetch(
+        "http://localhost:8080/api/employees",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(employee)
+        }
+    );
 
     if (response.ok) {
 
-        alert(
-            "Employee Added Successfully"
-        );
+        alert("Employee Added Successfully");
 
         document
-        .getElementById("employeeForm")
-        .reset();
+            .getElementById("employeeForm")
+            .reset();
 
         loadEmployees();
 
-    }
+    } else {
 
-    else {
-
-        alert(
-            "Error while adding employee"
-        );
+        alert("Error while adding employee");
 
     }
 
 });
-
-
 
 // Load Employees
 async function loadEmployees() {
 
     try {
 
-        const response =
-            await fetch(
-                "http://localhost:8080/api/employees"
-            );
+        const response = await fetch(
+            "http://localhost:8080/api/employees"
+        );
 
-        const employees =
-            await response.json();
+        const employees = await response.json();
+
+        // Dashboard Counter
+        document.getElementById("totalEmployees").innerText =
+            employees.length;
 
         let rows = "";
 
@@ -88,22 +69,22 @@ async function loadEmployees() {
             <tr>
 
                 <td>${emp.id}</td>
-
                 <td>${emp.name}</td>
-
                 <td>${emp.department}</td>
-
                 <td>${emp.email}</td>
-
-                <td>${emp.salary}</td>
+                <td>₹${emp.salary}</td>
 
                 <td>
 
-                    <button onclick="editEmployee(${emp.id})">
+                    <button
+                        class="btn btn-primary btn-sm me-2"
+                        onclick="editEmployee(${emp.id})">
                         Edit
                     </button>
 
-                    <button onclick="deleteEmployee(${emp.id})">
+                    <button
+                        class="btn btn-danger btn-sm"
+                        onclick="deleteEmployee(${emp.id})">
                         Delete
                     </button>
 
@@ -111,16 +92,12 @@ async function loadEmployees() {
 
             </tr>
             `;
-
         });
 
-        document
-        .getElementById("employeeTable")
-        .innerHTML = rows;
+        document.getElementById("employeeTable").innerHTML =
+            rows;
 
-    }
-
-    catch(error){
+    } catch (error) {
 
         console.log(error);
 
@@ -128,151 +105,104 @@ async function loadEmployees() {
 
 }
 
-
-
-// Delete
+// Delete Employee
 async function deleteEmployee(id) {
 
-    const ok =
-        confirm(
-            "Delete Employee?"
-        );
+    const ok = confirm(
+        "Are you sure you want to delete this employee?"
+    );
 
-    if(!ok){
+    if (!ok) {
         return;
     }
 
-    const response =
-        await fetch(
-            `http://localhost:8080/api/employees/${id}`,
-            {
-                method: "DELETE"
-            }
-        );
+    const response = await fetch(
+        `http://localhost:8080/api/employees/${id}`,
+        {
+            method: "DELETE"
+        }
+    );
 
-    if(response.ok){
+    if (response.ok) {
 
-        alert("Deleted");
+        alert("Employee Deleted Successfully");
 
         loadEmployees();
+
+    } else {
+
+        alert("Delete Failed");
 
     }
 
 }
 
-
-
-// Edit
+// Edit Employee
 async function editEmployee(id) {
 
-try{
+    try {
 
-const res =
-await fetch(
-`http://localhost:8080/api/employees/${id}`
-);
+        const res = await fetch(
+            `http://localhost:8080/api/employees/${id}`
+        );
 
-const emp =
-await res.json();
+        const emp = await res.json();
 
+        const name =
+            prompt("Enter Name", emp.name);
 
-const name =
-prompt(
-"Enter Name",
-emp.name
-);
+        if (name === null) return;
 
-if(name===null) return;
+        const department =
+            prompt("Enter Department", emp.department);
 
+        if (department === null) return;
 
-const department =
-prompt(
-"Enter Department",
-emp.department
-);
+        const email =
+            prompt("Enter Email", emp.email);
 
-if(department===null) return;
+        if (email === null) return;
 
+        const salary =
+            prompt("Enter Salary", emp.salary);
 
-const email =
-prompt(
-"Enter Email",
-emp.email
-);
+        if (salary === null) return;
 
-if(email===null) return;
+        const employee = {
+            name: name,
+            department: department,
+            email: email,
+            salary: Number(salary)
+        };
 
+        const response = await fetch(
+            `http://localhost:8080/api/employees/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(employee)
+            }
+        );
 
-const salary =
-prompt(
-"Enter Salary",
-emp.salary
-);
+        if (response.ok) {
 
-if(salary===null) return;
+            alert("Employee Updated Successfully");
 
+            loadEmployees();
 
-const employee = {
+        } else {
 
-name:name,
+            alert("Update Failed");
 
-department:department,
+        }
 
-email:email,
+    } catch (error) {
 
-salary:Number(salary)
+        console.log(error);
 
-};
-
-
-const response =
-await fetch(
-
-`http://localhost:8080/api/employees/${id}`,
-
-{
-
-method:"PUT",
-
-headers:{
-
-"Content-Type":
-"application/json"
-
-},
-
-body:
-JSON.stringify(employee)
+    }
 
 }
 
-);
-
-
-if(response.ok){
-
-alert(
-"Employee Updated Successfully"
-);
-
-loadEmployees();
-
-}
-
-else{
-
-alert(
-"Update Failed"
-);
-
-}
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
